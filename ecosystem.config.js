@@ -1,7 +1,7 @@
 module.exports = {
   apps: [
     {
-      name: 'react-boilerplate',
+      name: 'business-solutions-site',
       script: 'npm',
       args: 'start',
       cwd: '/var/www2',
