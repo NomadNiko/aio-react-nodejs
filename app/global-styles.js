@@ -11,18 +11,20 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+    font-family: 'Cairo', sans-serif !important;
   }
 
   body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Cairo', sans-serif !important;
     font-size: 16px;
-    line-height: 1.5;
+    line-height: 1.6;
     color: #333;
     background-color: #f8f9fa;
+    font-display: swap;
   }
 
   body.fontLoaded {
-    font-family: 'Open Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    font-family: 'Cairo', sans-serif !important;
   }
 
   #app {
@@ -34,16 +36,19 @@ const GlobalStyle = createGlobalStyle`
     margin: 0;
     font-weight: 600;
     line-height: 1.2;
+    font-family: 'Cairo', sans-serif !important;
   }
 
   p {
     margin: 0;
+    font-family: 'Cairo', sans-serif !important;
   }
 
   a {
     color: #007bff;
     text-decoration: none;
     transition: color 0.3s ease;
+    font-family: 'Cairo', sans-serif !important;
 
     &:hover {
       color: #0056b3;
@@ -51,15 +56,29 @@ const GlobalStyle = createGlobalStyle`
   }
 
   button {
-    font-family: inherit;
+    font-family: 'Cairo', sans-serif !important;
     font-size: inherit;
   }
 
   input,
   textarea,
   select {
-    font-family: inherit;
+    font-family: 'Cairo', sans-serif !important;
     font-size: inherit;
+  }
+
+  span,
+  div,
+  li,
+  ul,
+  ol,
+  nav,
+  header,
+  footer,
+  section,
+  article,
+  aside {
+    font-family: 'Cairo', sans-serif !important;
   }
 
   ::selection {

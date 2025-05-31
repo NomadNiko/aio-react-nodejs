@@ -15,7 +15,7 @@ const contactLimiter = rateLimit({
 });
 
 // Contact form endpoint
-router.post('/contact', contactLimiter, async (req, res) => {
+router.post('/', contactLimiter, async (req, res) => {
   const { name, email, phone, company, message } = req.body;
 
   // Validate required fields
@@ -133,4 +133,3 @@ Business Solutions Team
 });
 
 module.exports = router;
-

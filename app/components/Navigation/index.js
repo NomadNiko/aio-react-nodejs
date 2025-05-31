@@ -3,6 +3,7 @@ import { NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import LanguageSelector from '../LanguageSelector';
+import { useAuth } from '../../containers/AuthProvider';
 import messages from './messages';
 
 const Nav = styled.nav`
@@ -28,19 +29,60 @@ const NavContainer = styled.div`
 const NavRight = styled.div`
   display: flex;
   align-items: center;
-  gap: 30px;
+  gap: 15px;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: none;
   }
 `;
 
+const AuthButton = styled.button`
+  background: ${props => (props.primary ? '#007bff' : 'transparent')};
+  color: #fff;
+  border: ${props => (props.primary ? 'none' : '1px solid #007bff')};
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+  font-weight: 500;
+  font-family: 'Cairo', sans-serif !important;
+  transition: all 0.3s ease;
+  text-decoration: none;
+  display: inline-block;
+
+  &:hover {
+    background: ${props => (props.primary ? '#0056b3' : '#007bff')};
+    color: #fff;
+  }
+`;
+
+const UserInfo = styled.div`
+  color: #fff;
+  font-size: 14px;
+  font-family: 'Cairo', sans-serif !important;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+`;
+
 const Logo = styled.div`
-  font-size: 24px;
-  font-weight: bold;
+  font-size: 20px;
+  font-weight: 700;
   color: #fff;
   padding: 20px 0;
   z-index: 1002;
+  font-family: 'Cairo', sans-serif !important;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+
+  @media (max-width: 1200px) {
+    font-size: 18px;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 16px;
+  }
 `;
 
 const HamburgerButton = styled.button`
@@ -55,7 +97,7 @@ const HamburgerButton = styled.button`
   top: 50%;
   transform: translateY(-50%);
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: block;
   }
 
@@ -89,11 +131,15 @@ const HamburgerButton = styled.button`
 const NavMenu = styled.ul`
   list-style: none;
   display: flex;
-  gap: 30px;
+  gap: 20px;
   margin: 0;
   padding: 0;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1200px) {
+    gap: 15px;
+  }
+
+  @media (max-width: 1024px) {
     position: fixed;
     top: 70px;
     left: 0;
@@ -119,14 +165,25 @@ const NavItem = styled.li`
   &.mobile-language-selector {
     display: none;
 
-    @media (max-width: 768px) {
+    @media (max-width: 1024px) {
       display: block;
       border-bottom: none;
       padding-top: 20px;
     }
   }
 
-  @media (max-width: 768px) {
+  &.mobile-auth-links {
+    display: none;
+
+    @media (max-width: 1024px) {
+      display: block;
+      text-align: center;
+      padding: 20px 0;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+  }
+
+  @media (max-width: 1024px) {
     width: 100%;
     text-align: center;
     padding: 10px 0;
@@ -141,11 +198,16 @@ const NavItem = styled.li`
 const StyledNavLink = styled(NavLink)`
   color: #fff;
   text-decoration: none;
-  font-weight: 500;
+  font-weight: 400;
+  font-size: 15px;
   padding: 10px 0;
   position: relative;
   transition: color 0.3s ease;
   display: inline-block;
+  font-family: 'Cairo', sans-serif !important;
+  white-space: nowrap;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
 
   &:hover {
     color: #007bff;
@@ -183,7 +245,7 @@ const StyledNavLink = styled(NavLink)`
 const Overlay = styled.div`
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: 1024px) {
     display: block;
     position: fixed;
     top: 0;
@@ -200,6 +262,7 @@ const Overlay = styled.div`
 
 function Navigation() {
   const [isOpen, setIsOpen] = useState(false);
+  const { user, isAuthenticated, isAdmin, logout, loading } = useAuth();
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
@@ -207,6 +270,11 @@ function Navigation() {
 
   const closeMenu = () => {
     setIsOpen(false);
+  };
+
+  const handleLogout = async () => {
+    await logout();
+    closeMenu();
   };
 
   return (
@@ -237,11 +305,62 @@ function Navigation() {
                 <FormattedMessage {...messages.contact} />
               </StyledNavLink>
             </NavItem>
+            {/* Admin link for admin users */}
+            {!loading && isAuthenticated && isAdmin && (
+              <NavItem>
+                <StyledNavLink to="/admin/users" onClick={closeMenu}>
+                  <FormattedMessage {...messages.adminUsers} />
+                </StyledNavLink>
+              </NavItem>
+            )}
+            {/* Mobile-only auth links */}
+            <NavItem className="mobile-auth-links">
+              {!loading && !isAuthenticated && (
+                <>
+                  <StyledNavLink to="/login" onClick={closeMenu}>
+                    <FormattedMessage {...messages.login} />
+                  </StyledNavLink>
+                  <StyledNavLink
+                    to="/register"
+                    onClick={closeMenu}
+                    style={{ marginLeft: '20px' }}
+                  >
+                    <FormattedMessage {...messages.register} />
+                  </StyledNavLink>
+                </>
+              )}
+              {!loading && isAuthenticated && (
+                <AuthButton onClick={handleLogout}>
+                  <FormattedMessage {...messages.logout} />
+                </AuthButton>
+              )}
+            </NavItem>
             <NavItem className="mobile-language-selector">
               <LanguageSelector />
             </NavItem>
           </NavMenu>
           <NavRight>
+            {!loading && !isAuthenticated && (
+              <>
+                <AuthButton as={NavLink} to="/login">
+                  <FormattedMessage {...messages.login} />
+                </AuthButton>
+                <AuthButton as={NavLink} to="/register" primary>
+                  <FormattedMessage {...messages.register} />
+                </AuthButton>
+              </>
+            )}
+            {!loading && isAuthenticated && (
+              <>
+                <UserInfo>
+                  <FormattedMessage {...messages.welcome} />{' '}
+                  {user && user.firstName}
+                </UserInfo>
+                <AuthButton onClick={handleLogout}>
+                  <FormattedMessage {...messages.logout} />
+                </AuthButton>
+              </>
+            )}
             <div className="desktop-language-selector">
               <LanguageSelector />
             </div>

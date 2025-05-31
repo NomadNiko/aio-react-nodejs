@@ -17,6 +17,7 @@ module.exports = {
         MAIL_DEFAULT_NAME: 'Your Company Name',
         RATE_LIMIT_WINDOW_MS: 900000,
         RATE_LIMIT_MAX_REQUESTS: 5,
+        ENABLE_DYNAMIC_LOADING: true,
       },
       env_production: {
         NODE_ENV: 'production',
@@ -29,8 +30,8 @@ module.exports = {
         MAIL_DEFAULT_NAME: 'Your Company Name',
         RATE_LIMIT_WINDOW_MS: 900000,
         RATE_LIMIT_MAX_REQUESTS: 5,
+        ENABLE_DYNAMIC_LOADING: true,
       },
     },
   ],
 };
-

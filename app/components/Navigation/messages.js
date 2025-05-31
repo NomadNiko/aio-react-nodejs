@@ -28,5 +28,24 @@ export default defineMessages({
     id: `${scope}.contact`,
     defaultMessage: 'Contact',
   },
+  login: {
+    id: `${scope}.login`,
+    defaultMessage: 'Login',
+  },
+  register: {
+    id: `${scope}.register`,
+    defaultMessage: 'Register',
+  },
+  logout: {
+    id: `${scope}.logout`,
+    defaultMessage: 'Logout',
+  },
+  welcome: {
+    id: `${scope}.welcome`,
+    defaultMessage: 'Welcome,',
+  },
+  adminUsers: {
+    id: `${scope}.adminUsers`,
+    defaultMessage: 'Manage Users',
+  },
 });
-

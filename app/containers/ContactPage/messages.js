@@ -92,4 +92,3 @@ export default defineMessages({
     defaultMessage: '📍 Business Location',
   },
 });
-

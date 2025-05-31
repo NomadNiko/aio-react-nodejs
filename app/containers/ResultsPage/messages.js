@@ -155,4 +155,3 @@ export default defineMessages({
     defaultMessage: 'VP Operations, Manufacturing Plus',
   },
 });
-

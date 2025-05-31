@@ -8,6 +8,13 @@
 // Needed for redux-saga es6 generator support
 import '@babel/polyfill';
 
+// Import Cairo font - preload common weights first
+import '@fontsource/cairo/400.css';
+import '@fontsource/cairo/600.css';
+import '@fontsource/cairo/300.css';
+import '@fontsource/cairo/500.css';
+import '@fontsource/cairo/700.css';
+
 // Import all the third party stuff
 import React from 'react';
 import ReactDOM from 'react-dom';
@@ -33,6 +40,9 @@ import configureStore from './configureStore';
 // Import i18n messages
 import { translationMessages } from './i18n';
 
+// Import preloader service
+import preloaderService from './utils/preloader';
+
 // Create redux store with history
 const initialState = {};
 const store = configureStore(initialState, history);
@@ -49,6 +59,13 @@ const render = messages => {
     </Provider>,
     MOUNT_NODE,
   );
+
+  // Start preloading site data silently after initial render
+  if (preloaderService.isPreloadingEnabled()) {
+    setTimeout(() => {
+      preloaderService.preloadSiteData();
+    }, 100); // Small delay to ensure initial render is complete
+  }
 };
 
 if (module.hot) {

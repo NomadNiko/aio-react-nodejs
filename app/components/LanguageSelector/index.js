@@ -8,6 +8,10 @@ import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { changeLocale } from 'containers/LanguageProvider/actions';
 import { appLocales } from '../../i18n';
 
+import flagUs from '../../images/flag-us.svg';
+import flagEs from '../../images/flag-es.svg';
+import flagDe from '../../images/flag-de.svg';
+
 const LanguageWrapper = styled.div`
   display: flex;
   align-items: center;
@@ -54,10 +58,6 @@ const FlagIcon = styled.img`
     height: 17px;
   }
 `;
-
-import flagUs from '../../images/flag-us.svg';
-import flagEs from '../../images/flag-es.svg';
-import flagDe from '../../images/flag-de.svg';
 
 const languageFlags = {
   en: flagUs,
