@@ -81,7 +81,7 @@ class PreloaderService {
   async preloadApiData() {
     // Basic health check
     const basicEndpoints = ['/api/health'];
-    
+
     const basicPromises = basicEndpoints.map(async endpoint => {
       try {
         const response = await fetch(endpoint);
@@ -171,7 +171,7 @@ class PreloaderService {
    */
   async getApiData(url, options = {}) {
     const cacheKey = `api-${url.replace(/[^a-zA-Z0-9]/g, '-')}`;
-    
+
     // Return cached data if available
     const cached = this.preloadedData.get(cacheKey);
     if (cached) {
@@ -199,15 +199,19 @@ class PreloaderService {
   getCachedUsers(page = 1, search = '') {
     const searchKey = search ? `users-search-${search}` : 'users-search-empty';
     const pageKey = `users-page-${page}`;
-    
+
     // Try exact match first
-    let cached = this.preloadedData.get(`api-${pageKey}`) || this.preloadedData.get(`api-${searchKey}`);
-    
+    let cached =
+      this.preloadedData.get(`api-${pageKey}`) ||
+      this.preloadedData.get(`api-${searchKey}`);
+
     // If no exact match and it's page 1 with no search, try the general cached data
     if (!cached && page === 1 && !search) {
-      cached = this.preloadedData.get('api-users-page-1') || this.preloadedData.get('api-users-search-empty');
+      cached =
+        this.preloadedData.get('api-users-page-1') ||
+        this.preloadedData.get('api-users-search-empty');
     }
-    
+
     return cached;
   }
 

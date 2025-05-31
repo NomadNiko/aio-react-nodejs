@@ -36,22 +36,20 @@ const PageSubtitle = styled.p`
   }
 `;
 
-const ServiceHeader = () => {
-  return (
-    <HeaderContainer>
-      <SlideDown delay={0.2}>
-        <PageTitle>
-          <FormattedMessage {...messages.pageTitle} />
-        </PageTitle>
-      </SlideDown>
-      
-      <FadeIn delay={0.5}>
-        <PageSubtitle>
-          <FormattedMessage {...messages.pageSubtitle} />
-        </PageSubtitle>
-      </FadeIn>
-    </HeaderContainer>
-  );
-};
+const ServiceHeader = () => (
+  <HeaderContainer>
+    <SlideDown delay={0.2}>
+      <PageTitle>
+        <FormattedMessage {...messages.pageTitle} />
+      </PageTitle>
+    </SlideDown>
+
+    <FadeIn delay={0.5}>
+      <PageSubtitle>
+        <FormattedMessage {...messages.pageSubtitle} />
+      </PageSubtitle>
+    </FadeIn>
+  </HeaderContainer>
+);
 
 export default ServiceHeader;

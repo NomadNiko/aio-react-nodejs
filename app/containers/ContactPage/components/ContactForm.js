@@ -2,7 +2,11 @@ import React, { useState } from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { motion } from 'framer-motion';
-import { SlideRight, StaggerContainer, AnimatedButton } from '../../../components/AnimationComponents';
+import {
+  SlideRight,
+  StaggerContainer,
+  AnimatedButton,
+} from '../../../components/AnimationComponents';
 import { fadeInUp } from '../../../utils/animations';
 import messages from '../messages';
 
@@ -179,7 +183,12 @@ const ContactForm = () => {
     { name: 'name', type: 'text', labelKey: 'fullNameLabel', required: true },
     { name: 'email', type: 'email', labelKey: 'emailLabel', required: true },
     { name: 'phone', type: 'tel', labelKey: 'phoneLabel', required: false },
-    { name: 'company', type: 'text', labelKey: 'companyLabel', required: false },
+    {
+      name: 'company',
+      type: 'text',
+      labelKey: 'companyLabel',
+      required: false,
+    },
   ];
 
   return (
@@ -210,9 +219,9 @@ const ContactForm = () => {
           </ErrorMessage>
         )}
 
-        <StaggerContainer 
-          threshold={0.1} 
-          staggerDelay={0.1} 
+        <StaggerContainer
+          threshold={0.1}
+          staggerDelay={0.1}
           delayChildren={0.6}
         >
           {formFields.map((field, index) => (

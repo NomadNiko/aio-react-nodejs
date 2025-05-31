@@ -274,13 +274,13 @@ export const textReveal = {
 };
 
 // Utility to get reduced motion safe variants
-export const getVariant = (variant) => {
+export const getVariant = variant => {
   if (prefersReducedMotion()) {
     return {
       hidden: { opacity: 0 },
-      visible: { 
+      visible: {
         opacity: 1,
-        transition: { duration: durations.fast }
+        transition: { duration: durations.fast },
       },
     };
   }

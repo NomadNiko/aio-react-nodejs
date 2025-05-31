@@ -2,8 +2,13 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { motion } from 'framer-motion';
-import { SlideDown, SlideUp, FadeIn } from '../../../components/AnimationComponents';
-import { AnimatedButton } from '../../../components/AnimationComponents';
+import {
+  SlideDown,
+  SlideUp,
+  FadeIn,
+  AnimatedButton,
+} from '../../../components/AnimationComponents';
+
 import messages from '../messages';
 
 const HeroContainer = styled.section`
@@ -52,7 +57,7 @@ const CTAButton = styled(AnimatedButton)`
   cursor: pointer;
   font-family: 'Cairo', sans-serif !important;
   font-weight: 500;
-  
+
   &:hover {
     background-color: #0056b3;
   }
@@ -76,13 +81,13 @@ const HeroSection = () => {
             <FormattedMessage {...messages.heroTitle} />
           </HeroTitle>
         </SlideDown>
-        
+
         <FadeIn delay={1.0}>
           <HeroSubtitle>
             <FormattedMessage {...messages.heroSubtitle} />
           </HeroSubtitle>
         </FadeIn>
-        
+
         <SlideUp delay={1.4}>
           <CTAButton
             onClick={handleGetStarted}

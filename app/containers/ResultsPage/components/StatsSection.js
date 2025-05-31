@@ -35,7 +35,11 @@ const StatCard = styled(motion.div)`
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
     animation: rotate 20s linear infinite;
   }
 
@@ -102,7 +106,9 @@ const CountUp = ({ end, duration = 2000, prefix = '', suffix = '' }) => {
 
   return (
     <motion.span ref={ref}>
-      {prefix}{count}{suffix}
+      {prefix}
+      {count}
+      {suffix}
     </motion.span>
   );
 };
@@ -114,38 +120,32 @@ const stats = [
   { value: 150, suffix: '+', messageKey: 'projectsCompleted' },
 ];
 
-const StatsSection = () => {
-  return (
-    <StaggerContainer 
-      threshold={0.3} 
-      staggerDelay={0.15} 
-      delayChildren={0.8}
-    >
-      <StatsSectionContainer>
-        {stats.map((stat, index) => (
-          <StatCard
-            key={index}
-            whileHover={{ 
-              scale: 1.05,
-              boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
-            }}
-            transition={{ duration: 0.3 }}
-          >
-            <h3>
-              <CountUp 
-                end={stat.value} 
-                prefix={stat.prefix || ''} 
-                suffix={stat.suffix || ''} 
-              />
-            </h3>
-            <p>
-              <FormattedMessage {...messages[stat.messageKey]} />
-            </p>
-          </StatCard>
-        ))}
-      </StatsSectionContainer>
-    </StaggerContainer>
-  );
-};
+const StatsSection = () => (
+  <StaggerContainer threshold={0.3} staggerDelay={0.15} delayChildren={0.8}>
+    <StatsSectionContainer>
+      {stats.map((stat, index) => (
+        <StatCard
+          key={index}
+          whileHover={{
+            scale: 1.05,
+            boxShadow: '0 10px 30px rgba(0, 0, 0, 0.2)',
+          }}
+          transition={{ duration: 0.3 }}
+        >
+          <h3>
+            <CountUp
+              end={stat.value}
+              prefix={stat.prefix || ''}
+              suffix={stat.suffix || ''}
+            />
+          </h3>
+          <p>
+            <FormattedMessage {...messages[stat.messageKey]} />
+          </p>
+        </StatCard>
+      ))}
+    </StatsSectionContainer>
+  </StaggerContainer>
+);
 
 export default StatsSection;

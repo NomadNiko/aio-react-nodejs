@@ -7,29 +7,29 @@ import { motion } from 'framer-motion';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import { useScrollAnimation } from '../../utils/useAnimations';
-import { 
-  fadeInUp, 
-  fadeInDown, 
-  fadeInLeft, 
+import {
+  fadeInUp,
+  fadeInDown,
+  fadeInLeft,
   fadeInRight,
   fadeIn,
   scaleIn,
   staggerContainer,
   cardEntrance,
   shimmer,
-  getVariant
+  getVariant,
 } from '../../utils/animations';
 
 /**
  * AnimatedSection - Wrapper for scroll-triggered animations
  */
-export const AnimatedSection = ({ 
-  children, 
-  variant = fadeInUp, 
-  threshold = 0.1, 
+export const AnimatedSection = ({
+  children,
+  variant = fadeInUp,
+  threshold = 0.1,
   triggerOnce = true,
   delay = 0,
-  ...props 
+  ...props
 }) => {
   const [ref, isInView] = useScrollAnimation(threshold, triggerOnce);
 
@@ -37,7 +37,7 @@ export const AnimatedSection = ({
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
       variants={getVariant(variant)}
       transition={{ delay }}
       {...props}
@@ -58,12 +58,12 @@ AnimatedSection.propTypes = {
 /**
  * StaggerContainer - For staggered child animations
  */
-export const StaggerContainer = ({ 
-  children, 
-  staggerDelay = 0.1, 
+export const StaggerContainer = ({
+  children,
+  staggerDelay = 0.1,
   delayChildren = 0.1,
   threshold = 0.1,
-  ...props 
+  ...props
 }) => {
   const [ref, isInView] = useScrollAnimation(threshold);
 
@@ -72,7 +72,7 @@ export const StaggerContainer = ({
     visible: {
       transition: {
         staggerChildren: staggerDelay,
-        delayChildren: delayChildren,
+        delayChildren,
       },
     },
   };
@@ -81,7 +81,7 @@ export const StaggerContainer = ({
     <motion.div
       ref={ref}
       initial="hidden"
-      animate={isInView ? "visible" : "hidden"}
+      animate={isInView ? 'visible' : 'hidden'}
       variants={containerVariants}
       {...props}
     >
@@ -202,7 +202,7 @@ export const AnimatedButton = styled(motion.button)`
   cursor: pointer;
   border: none;
   background: transparent;
-  
+
   &:focus {
     outline: none;
   }
@@ -218,21 +218,16 @@ AnimatedButton.defaultProps = {
  * SkeletonLoader - Loading skeleton with shimmer effect
  */
 const SkeletonWrapper = styled(motion.div)`
-  background: linear-gradient(
-    90deg,
-    #f0f0f0 0%,
-    #e0e0e0 50%,
-    #f0f0f0 100%
-  );
+  background: linear-gradient(90deg, #f0f0f0 0%, #e0e0e0 50%, #f0f0f0 100%);
   background-size: 200% 100%;
   border-radius: 4px;
 `;
 
-export const SkeletonLoader = ({ 
-  width = '100%', 
-  height = '20px', 
+export const SkeletonLoader = ({
+  width = '100%',
+  height = '20px',
   borderRadius = '4px',
-  ...props 
+  ...props
 }) => (
   <SkeletonWrapper
     style={{ width, height, borderRadius }}
@@ -252,12 +247,12 @@ SkeletonLoader.propTypes = {
 /**
  * AnimatedCounter - Animated number counter
  */
-export const AnimatedCounter = ({ 
-  from = 0, 
-  to, 
-  duration = 2, 
+export const AnimatedCounter = ({
+  from = 0,
+  to,
+  duration = 2,
   suffix = '',
-  ...props 
+  ...props
 }) => {
   const [ref, isInView] = useScrollAnimation(0.5, true);
   const [count, setCount] = React.useState(from);
@@ -266,12 +261,12 @@ export const AnimatedCounter = ({
     if (!isInView) return;
 
     let startTime;
-    const animate = (timestamp) => {
+    const animate = timestamp => {
       if (!startTime) startTime = timestamp;
       const progress = Math.min((timestamp - startTime) / (duration * 1000), 1);
-      
+
       setCount(Math.floor(from + (to - from) * progress));
-      
+
       if (progress < 1) {
         requestAnimationFrame(animate);
       }
@@ -282,7 +277,8 @@ export const AnimatedCounter = ({
 
   return (
     <motion.span ref={ref} {...props}>
-      {count}{suffix}
+      {count}
+      {suffix}
     </motion.span>
   );
 };
@@ -318,15 +314,15 @@ PageTransition.propTypes = {
  */
 export const HoverCard = styled(motion.div)`
   cursor: pointer;
-  
+
   &:hover {
     z-index: 1;
   }
 `;
 
 HoverCard.defaultProps = {
-  whileHover: { 
-    scale: 1.02, 
+  whileHover: {
+    scale: 1.02,
     y: -5,
     boxShadow: '0 10px 30px rgba(0,0,0,0.15)',
   },

@@ -33,7 +33,7 @@ export default function ContactPage() {
     <PageTransition>
       <ContactContainer>
         <ContactHeader />
-        
+
         <ContactGrid>
           <ContactInfo />
           <ContactForm />

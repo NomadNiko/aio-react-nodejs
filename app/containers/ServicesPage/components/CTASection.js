@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { motion } from 'framer-motion';
-import { SlideUp, FadeIn, AnimatedButton } from '../../../components/AnimationComponents';
+import {
+  SlideUp,
+  FadeIn,
+  AnimatedButton,
+} from '../../../components/AnimationComponents';
 import messages from '../messages';
 
 const CTAContainer = styled(motion.section)`
@@ -22,12 +26,17 @@ const CTAContainer = styled(motion.section)`
     right: -50%;
     width: 200%;
     height: 200%;
-    background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+    background: radial-gradient(
+      circle,
+      rgba(255, 255, 255, 0.1) 0%,
+      transparent 70%
+    );
     animation: pulse 4s ease-in-out infinite;
   }
 
   @keyframes pulse {
-    0%, 100% {
+    0%,
+    100% {
       transform: scale(1);
     }
     50% {
@@ -107,13 +116,13 @@ const CTASection = () => {
             <FormattedMessage {...messages.ctaTitle} />
           </h2>
         </FadeIn>
-        
+
         <FadeIn delay={0.6}>
           <p>
             <FormattedMessage {...messages.ctaDescription} />
           </p>
         </FadeIn>
-        
+
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}

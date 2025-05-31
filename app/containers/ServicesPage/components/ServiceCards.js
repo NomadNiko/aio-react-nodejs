@@ -2,7 +2,10 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { motion } from 'framer-motion';
-import { StaggerContainer, HoverCard } from '../../../components/AnimationComponents';
+import {
+  StaggerContainer,
+  HoverCard,
+} from '../../../components/AnimationComponents';
 import { fadeInUp } from '../../../utils/animations';
 import messages from '../messages';
 
@@ -168,56 +171,50 @@ const services = [
   },
 ];
 
-const ServiceCards = () => {
-  return (
-    <StaggerContainer 
-      threshold={0.1} 
-      staggerDelay={0.15} 
-      delayChildren={0.6}
-    >
-      <ServiceGrid>
-        {services.map((service, index) => (
-          <motion.div key={index} variants={fadeInUp}>
-            <ServiceCard
-              whileHover={{
-                y: -10,
-                boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
-              }}
-              transition={{
-                duration: 0.4,
-                ease: [0.25, 0.46, 0.45, 0.94],
-              }}
-            >
-              <h3>
-                <span className="icon" role="img" aria-label={service.iconLabel}>
-                  {service.icon}
-                </span>
-                <FormattedMessage {...messages[service.titleKey]} />
-              </h3>
-              <p>
-                <FormattedMessage {...messages[service.descriptionKey]} />
-              </p>
-              <ul>
-                {service.items.map((item, itemIndex) => (
-                  <motion.li
-                    key={itemIndex}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{
-                      delay: 0.8 + itemIndex * 0.1,
-                      duration: 0.4,
-                    }}
-                  >
-                    <FormattedMessage {...messages[item]} />
-                  </motion.li>
-                ))}
-              </ul>
-            </ServiceCard>
-          </motion.div>
-        ))}
-      </ServiceGrid>
-    </StaggerContainer>
-  );
-};
+const ServiceCards = () => (
+  <StaggerContainer threshold={0.1} staggerDelay={0.15} delayChildren={0.6}>
+    <ServiceGrid>
+      {services.map((service, index) => (
+        <motion.div key={index} variants={fadeInUp}>
+          <ServiceCard
+            whileHover={{
+              y: -10,
+              boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+            }}
+            transition={{
+              duration: 0.4,
+              ease: [0.25, 0.46, 0.45, 0.94],
+            }}
+          >
+            <h3>
+              <span className="icon" role="img" aria-label={service.iconLabel}>
+                {service.icon}
+              </span>
+              <FormattedMessage {...messages[service.titleKey]} />
+            </h3>
+            <p>
+              <FormattedMessage {...messages[service.descriptionKey]} />
+            </p>
+            <ul>
+              {service.items.map((item, itemIndex) => (
+                <motion.li
+                  key={itemIndex}
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{
+                    delay: 0.8 + itemIndex * 0.1,
+                    duration: 0.4,
+                  }}
+                >
+                  <FormattedMessage {...messages[item]} />
+                </motion.li>
+              ))}
+            </ul>
+          </ServiceCard>
+        </motion.div>
+      ))}
+    </ServiceGrid>
+  </StaggerContainer>
+);
 
 export default ServiceCards;

@@ -36,22 +36,20 @@ const PageSubtitle = styled.p`
   }
 `;
 
-const ContactHeader = () => {
-  return (
-    <HeaderContainer>
-      <SlideDown delay={0.2}>
-        <PageTitle>
-          <FormattedMessage {...messages.pageTitle} />
-        </PageTitle>
-      </SlideDown>
-      
-      <FadeIn delay={0.4}>
-        <PageSubtitle>
-          <FormattedMessage {...messages.pageSubtitle} />
-        </PageSubtitle>
-      </FadeIn>
-    </HeaderContainer>
-  );
-};
+const ContactHeader = () => (
+  <HeaderContainer>
+    <SlideDown delay={0.2}>
+      <PageTitle>
+        <FormattedMessage {...messages.pageTitle} />
+      </PageTitle>
+    </SlideDown>
+
+    <FadeIn delay={0.4}>
+      <PageSubtitle>
+        <FormattedMessage {...messages.pageSubtitle} />
+      </PageSubtitle>
+    </FadeIn>
+  </HeaderContainer>
+);
 
 export default ContactHeader;

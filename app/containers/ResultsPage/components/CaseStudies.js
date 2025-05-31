@@ -2,7 +2,11 @@ import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
 import { motion } from 'framer-motion';
-import { SlideUp, StaggerContainer, HoverCard } from '../../../components/AnimationComponents';
+import {
+  SlideUp,
+  StaggerContainer,
+  HoverCard,
+} from '../../../components/AnimationComponents';
 import { fadeInUp } from '../../../utils/animations';
 import messages from '../messages';
 
@@ -143,109 +147,110 @@ const CaseStudyContent = styled.div`
 
 const caseStudies = [
   {
-    image: 'linear-gradient(45deg, #ff6b6b 0%, #ee5a52 100%), url("https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
+    image:
+      'linear-gradient(45deg, #ff6b6b 0%, #ee5a52 100%), url("https://images.unsplash.com/photo-1551434678-e076c223a692?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
     imageLabel: 'techInnovation',
     title: 'techStartupTitle',
     description: 'techStartupDescription',
     results: ['techResult1', 'techResult2', 'techResult3'],
   },
   {
-    image: 'linear-gradient(45deg, #4ecdc4 0%, #44a08d 100%), url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
+    image:
+      'linear-gradient(45deg, #4ecdc4 0%, #44a08d 100%), url("https://images.unsplash.com/photo-1441986300917-64674bd600d8?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
     imageLabel: 'retailExcellence',
     title: 'retailBrandTitle',
     description: 'retailBrandDescription',
     results: ['retailResult1', 'retailResult2', 'retailResult3'],
   },
   {
-    image: 'linear-gradient(45deg, #f093fb 0%, #f5576c 100%), url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
+    image:
+      'linear-gradient(45deg, #f093fb 0%, #f5576c 100%), url("https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80")',
     imageLabel: 'manufacturingInnovation',
     title: 'manufacturingTitle',
     description: 'manufacturingDescription',
-    results: ['manufacturingResult1', 'manufacturingResult2', 'manufacturingResult3'],
+    results: [
+      'manufacturingResult1',
+      'manufacturingResult2',
+      'manufacturingResult3',
+    ],
   },
 ];
 
-const CaseStudies = () => {
-  return (
-    <CaseStudySectionContainer>
-      <SlideUp threshold={0.3}>
-        <SectionTitle>
-          <FormattedMessage {...messages.successStoriesTitle} />
-        </SectionTitle>
-      </SlideUp>
+const CaseStudies = () => (
+  <CaseStudySectionContainer>
+    <SlideUp threshold={0.3}>
+      <SectionTitle>
+        <FormattedMessage {...messages.successStoriesTitle} />
+      </SectionTitle>
+    </SlideUp>
 
-      <StaggerContainer 
-        threshold={0.2} 
-        staggerDelay={0.2} 
-        delayChildren={0.4}
-      >
-        <CaseStudyGrid>
-          {caseStudies.map((study, index) => (
-            <motion.div key={index} variants={fadeInUp}>
-              <CaseStudyCard
-                whileHover={{
-                  y: -10,
-                  boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+    <StaggerContainer threshold={0.2} staggerDelay={0.2} delayChildren={0.4}>
+      <CaseStudyGrid>
+        {caseStudies.map((study, index) => (
+          <motion.div key={index} variants={fadeInUp}>
+            <CaseStudyCard
+              whileHover={{
+                y: -10,
+                boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+              }}
+              transition={{
+                duration: 0.4,
+                ease: [0.25, 0.46, 0.45, 0.94],
+              }}
+            >
+              <CaseStudyImage
+                style={{
+                  background: study.image,
+                  backgroundSize: 'cover',
+                  backgroundPosition: 'center',
+                  backgroundBlendMode: 'overlay',
                 }}
-                transition={{
-                  duration: 0.4,
-                  ease: [0.25, 0.46, 0.45, 0.94],
-                }}
+                whileHover={{ scale: 1.05 }}
+                transition={{ duration: 0.6 }}
               >
-                <CaseStudyImage
-                  style={{
-                    background: study.image,
-                    backgroundSize: 'cover',
-                    backgroundPosition: 'center',
-                    backgroundBlendMode: 'overlay',
-                  }}
-                  whileHover={{ scale: 1.05 }}
-                  transition={{ duration: 0.6 }}
+                <span>
+                  <FormattedMessage {...messages[study.imageLabel]} />
+                </span>
+              </CaseStudyImage>
+              <CaseStudyContent>
+                <h3>
+                  <FormattedMessage {...messages[study.title]} />
+                </h3>
+                <p>
+                  <FormattedMessage {...messages[study.description]} />
+                </p>
+                <motion.div
+                  className="results"
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.6 }}
                 >
-                  <span>
-                    <FormattedMessage {...messages[study.imageLabel]} />
-                  </span>
-                </CaseStudyImage>
-                <CaseStudyContent>
-                  <h3>
-                    <FormattedMessage {...messages[study.title]} />
-                  </h3>
-                  <p>
-                    <FormattedMessage {...messages[study.description]} />
-                  </p>
-                  <motion.div 
-                    className="results"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ delay: 0.6 }}
-                  >
-                    <h4>
-                      <FormattedMessage {...messages.keyResults} />
-                    </h4>
-                    <ul>
-                      {study.results.map((result, resultIndex) => (
-                        <motion.li
-                          key={resultIndex}
-                          initial={{ opacity: 0, x: -20 }}
-                          animate={{ opacity: 1, x: 0 }}
-                          transition={{
-                            delay: 0.8 + resultIndex * 0.1,
-                            duration: 0.4,
-                          }}
-                        >
-                          <FormattedMessage {...messages[result]} />
-                        </motion.li>
-                      ))}
-                    </ul>
-                  </motion.div>
-                </CaseStudyContent>
-              </CaseStudyCard>
-            </motion.div>
-          ))}
-        </CaseStudyGrid>
-      </StaggerContainer>
-    </CaseStudySectionContainer>
-  );
-};
+                  <h4>
+                    <FormattedMessage {...messages.keyResults} />
+                  </h4>
+                  <ul>
+                    {study.results.map((result, resultIndex) => (
+                      <motion.li
+                        key={resultIndex}
+                        initial={{ opacity: 0, x: -20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        transition={{
+                          delay: 0.8 + resultIndex * 0.1,
+                          duration: 0.4,
+                        }}
+                      >
+                        <FormattedMessage {...messages[result]} />
+                      </motion.li>
+                    ))}
+                  </ul>
+                </motion.div>
+              </CaseStudyContent>
+            </CaseStudyCard>
+          </motion.div>
+        ))}
+      </CaseStudyGrid>
+    </StaggerContainer>
+  </CaseStudySectionContainer>
+);
 
 export default CaseStudies;

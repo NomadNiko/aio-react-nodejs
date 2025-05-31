@@ -28,7 +28,7 @@ export const useScrollAnimation = (threshold = 0.1, triggerOnce = true) => {
       {
         threshold,
         rootMargin: '0px 0px -50px 0px', // Trigger slightly before element is fully visible
-      }
+      },
     );
 
     if (ref.current) {
@@ -54,9 +54,9 @@ export const useStaggerAnimation = (itemCount, staggerDelay = 0.1) => {
 
   const startAnimation = async () => {
     if (isVisible) return;
-    
+
     setIsVisible(true);
-    
+
     for (let i = 0; i < itemCount; i++) {
       controls.start(`item-${i}`, {
         opacity: 1,
@@ -76,7 +76,7 @@ export const useStaggerAnimation = (itemCount, staggerDelay = 0.1) => {
 /**
  * Hook for loading animations
  */
-export const useLoadingAnimation = (isLoading) => {
+export const useLoadingAnimation = isLoading => {
   const [showSkeleton, setShowSkeleton] = useState(isLoading);
   const [showContent, setShowContent] = useState(!isLoading);
 
@@ -101,7 +101,7 @@ export const useLoadingAnimation = (isLoading) => {
  */
 export const useHoverAnimation = () => {
   const [isHovered, setIsHovered] = useState(false);
-  
+
   const hoverProps = {
     onMouseEnter: () => setIsHovered(true),
     onMouseLeave: () => setIsHovered(false),
@@ -120,9 +120,9 @@ export const useTextAnimation = (texts, interval = 3000) => {
   useEffect(() => {
     const timer = setInterval(() => {
       setIsAnimating(true);
-      
+
       setTimeout(() => {
-        setCurrentIndex((prev) => (prev + 1) % texts.length);
+        setCurrentIndex(prev => (prev + 1) % texts.length);
         setIsAnimating(false);
       }, 200);
     }, interval);
@@ -168,7 +168,7 @@ export const useCountAnimation = (end, duration = 2000, start = 0) => {
     if (!isVisible) return;
 
     let startTime;
-    const animate = (timestamp) => {
+    const animate = timestamp => {
       if (!startTime) startTime = timestamp;
       const progress = (timestamp - startTime) / duration;
 
@@ -193,10 +193,10 @@ export const useCountAnimation = (end, duration = 2000, start = 0) => {
  */
 export const usePageTransition = () => {
   const [isAnimating, setIsAnimating] = useState(false);
-  
+
   const startTransition = () => {
     setIsAnimating(true);
-    return new Promise((resolve) => {
+    return new Promise(resolve => {
       setTimeout(() => {
         setIsAnimating(false);
         resolve();

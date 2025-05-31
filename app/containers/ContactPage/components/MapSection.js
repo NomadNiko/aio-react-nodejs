@@ -59,34 +59,32 @@ const MapPlaceholder = styled(motion.div)`
   }
 `;
 
-const MapSection = () => {
-  return (
-    <MapContainer>
-      <SlideUp threshold={0.3}>
-        <MapTitle>
-          <FormattedMessage {...messages.findUsTitle} />
-        </MapTitle>
-      </SlideUp>
-      
-      <FadeIn threshold={0.2} delay={0.3}>
-        <MapPlaceholder
-          whileHover={{ 
-            scale: 1.02,
-            rotateY: 2,
-          }}
-          whileTap={{ scale: 0.98 }}
-          transition={{ 
-            duration: 0.3,
-            ease: [0.25, 0.46, 0.45, 0.94]
-          }}
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-        >
-          <FormattedMessage {...messages.mapPlaceholder} />
-        </MapPlaceholder>
-      </FadeIn>
-    </MapContainer>
-  );
-};
+const MapSection = () => (
+  <MapContainer>
+    <SlideUp threshold={0.3}>
+      <MapTitle>
+        <FormattedMessage {...messages.findUsTitle} />
+      </MapTitle>
+    </SlideUp>
+
+    <FadeIn threshold={0.2} delay={0.3}>
+      <MapPlaceholder
+        whileHover={{
+          scale: 1.02,
+          rotateY: 2,
+        }}
+        whileTap={{ scale: 0.98 }}
+        transition={{
+          duration: 0.3,
+          ease: [0.25, 0.46, 0.45, 0.94],
+        }}
+        initial={{ opacity: 0, y: 30 }}
+        animate={{ opacity: 1, y: 0 }}
+      >
+        <FormattedMessage {...messages.mapPlaceholder} />
+      </MapPlaceholder>
+    </FadeIn>
+  </MapContainer>
+);
 
 export default MapSection;

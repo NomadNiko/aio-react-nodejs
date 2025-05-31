@@ -1,7 +1,11 @@
 import React from 'react';
 import styled from 'styled-components';
 import { FormattedMessage } from 'react-intl';
-import { SlideLeft, SlideRight, FadeIn } from '../../../components/AnimationComponents';
+import {
+  SlideLeft,
+  SlideRight,
+  FadeIn,
+} from '../../../components/AnimationComponents';
 import messages from '../messages';
 
 const AboutContainer = styled.section`
@@ -75,38 +79,36 @@ const AboutImage = styled.div`
   }
 `;
 
-const AboutSection = () => {
-  return (
-    <AboutContainer>
-      <SlideLeft threshold={0.3} delay={0.2}>
-        <AboutContent>
-          <FadeIn delay={0.5}>
-            <h2>
-              <FormattedMessage {...messages.aboutTitle} />
-            </h2>
-          </FadeIn>
-          
-          <FadeIn delay={0.8}>
-            <p>
-              <FormattedMessage {...messages.aboutText1} />
-            </p>
-          </FadeIn>
-          
-          <FadeIn delay={1.1}>
-            <p>
-              <FormattedMessage {...messages.aboutText2} />
-            </p>
-          </FadeIn>
-        </AboutContent>
-      </SlideLeft>
-      
-      <SlideRight threshold={0.3} delay={0.6}>
-        <AboutImage>
-          <FormattedMessage {...messages.aboutImageAlt} />
-        </AboutImage>
-      </SlideRight>
-    </AboutContainer>
-  );
-};
+const AboutSection = () => (
+  <AboutContainer>
+    <SlideLeft threshold={0.3} delay={0.2}>
+      <AboutContent>
+        <FadeIn delay={0.5}>
+          <h2>
+            <FormattedMessage {...messages.aboutTitle} />
+          </h2>
+        </FadeIn>
+
+        <FadeIn delay={0.8}>
+          <p>
+            <FormattedMessage {...messages.aboutText1} />
+          </p>
+        </FadeIn>
+
+        <FadeIn delay={1.1}>
+          <p>
+            <FormattedMessage {...messages.aboutText2} />
+          </p>
+        </FadeIn>
+      </AboutContent>
+    </SlideLeft>
+
+    <SlideRight threshold={0.3} delay={0.6}>
+      <AboutImage>
+        <FormattedMessage {...messages.aboutImageAlt} />
+      </AboutImage>
+    </SlideRight>
+  </AboutContainer>
+);
 
 export default AboutSection;
