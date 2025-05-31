@@ -28,11 +28,10 @@ const NavContainer = styled.div`
 const NavRight = styled.div`
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 30px;
 
   @media (max-width: 768px) {
-    flex-direction: column;
-    gap: 0;
+    display: none;
   }
 `;
 
@@ -51,6 +50,10 @@ const HamburgerButton = styled.button`
   cursor: pointer;
   padding: 10px;
   z-index: 1002;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%);
 
   @media (max-width: 768px) {
     display: block;
@@ -93,6 +96,7 @@ const NavMenu = styled.ul`
   @media (max-width: 768px) {
     position: fixed;
     top: 70px;
+    left: 0;
     right: 0;
     width: 100%;
     flex-direction: column;
@@ -105,11 +109,22 @@ const NavMenu = styled.ul`
     visibility: ${props => (props.isOpen ? 'visible' : 'hidden')};
     transition: all 0.3s ease;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
   }
 `;
 
 const NavItem = styled.li`
   margin: 0;
+
+  &.mobile-language-selector {
+    display: none;
+
+    @media (max-width: 768px) {
+      display: block;
+      border-bottom: none;
+      padding-top: 20px;
+    }
+  }
 
   @media (max-width: 768px) {
     width: 100%;
@@ -201,38 +216,41 @@ function Navigation() {
           <Logo>
             <FormattedMessage {...messages.companyName} />
           </Logo>
+          <NavMenu isOpen={isOpen}>
+            <NavItem>
+              <StyledNavLink exact to="/" onClick={closeMenu}>
+                <FormattedMessage {...messages.home} />
+              </StyledNavLink>
+            </NavItem>
+            <NavItem>
+              <StyledNavLink to="/services" onClick={closeMenu}>
+                <FormattedMessage {...messages.services} />
+              </StyledNavLink>
+            </NavItem>
+            <NavItem>
+              <StyledNavLink to="/results" onClick={closeMenu}>
+                <FormattedMessage {...messages.results} />
+              </StyledNavLink>
+            </NavItem>
+            <NavItem>
+              <StyledNavLink to="/contact" onClick={closeMenu}>
+                <FormattedMessage {...messages.contact} />
+              </StyledNavLink>
+            </NavItem>
+            <NavItem className="mobile-language-selector">
+              <LanguageSelector />
+            </NavItem>
+          </NavMenu>
+          <NavRight>
+            <div className="desktop-language-selector">
+              <LanguageSelector />
+            </div>
+          </NavRight>
           <HamburgerButton onClick={toggleMenu} isOpen={isOpen}>
             <span />
             <span />
             <span />
           </HamburgerButton>
-          <NavRight>
-            <NavMenu isOpen={isOpen}>
-              <NavItem>
-                <StyledNavLink exact to="/" onClick={closeMenu}>
-                  <FormattedMessage {...messages.home} />
-                </StyledNavLink>
-              </NavItem>
-              <NavItem>
-                <StyledNavLink to="/services" onClick={closeMenu}>
-                  <FormattedMessage {...messages.services} />
-                </StyledNavLink>
-              </NavItem>
-              <NavItem>
-                <StyledNavLink to="/results" onClick={closeMenu}>
-                  <FormattedMessage {...messages.results} />
-                </StyledNavLink>
-              </NavItem>
-              <NavItem>
-                <StyledNavLink to="/contact" onClick={closeMenu}>
-                  <FormattedMessage {...messages.contact} />
-                </StyledNavLink>
-              </NavItem>
-              <NavItem className="language-selector">
-                <LanguageSelector />
-              </NavItem>
-            </NavMenu>
-          </NavRight>
         </NavContainer>
       </Nav>
       <Overlay isOpen={isOpen} onClick={closeMenu} />
@@ -241,4 +259,3 @@ function Navigation() {
 }
 
 export default Navigation;
-

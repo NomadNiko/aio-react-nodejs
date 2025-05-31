@@ -3,17 +3,15 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { createStructuredSelector } from 'reselect';
 import styled from 'styled-components';
-import { FormattedMessage } from 'react-intl';
 
 import { makeSelectLocale } from 'containers/LanguageProvider/selectors';
 import { changeLocale } from 'containers/LanguageProvider/actions';
 import { appLocales } from '../../i18n';
-import messages from './messages';
 
 const LanguageWrapper = styled.div`
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 6px;
 
   @media (max-width: 768px) {
     justify-content: center;
@@ -23,45 +21,49 @@ const LanguageWrapper = styled.div`
   }
 `;
 
-const LanguageLabel = styled.span`
-  color: #fff;
-  font-size: 14px;
-  font-weight: 500;
-
-  @media (max-width: 768px) {
-    font-size: 16px;
-  }
-`;
-
-const LanguageSelect = styled.select`
-  background-color: #333;
-  color: #fff;
-  border: 1px solid #555;
-  border-radius: 4px;
-  padding: 5px 10px;
-  font-size: 14px;
+const FlagButton = styled.button`
+  background: none;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.3s ease;
+  padding: 2px;
+  border-radius: 3px;
+  transition: all 0.2s ease;
+  opacity: ${props => (props.active ? '1' : '0.7')};
+  transform: scale(${props => (props.active ? '1' : '0.9')});
 
   &:hover {
-    border-color: #007bff;
-  }
-
-  &:focus {
-    outline: none;
-    border-color: #007bff;
-  }
-
-  option {
-    background-color: #333;
-    color: #fff;
+    opacity: 1;
+    transform: scale(1);
+    background-color: rgba(255, 255, 255, 0.1);
   }
 
   @media (max-width: 768px) {
-    font-size: 16px;
-    padding: 8px 12px;
+    padding: 4px;
   }
 `;
+
+const FlagIcon = styled.img`
+  width: 20px;
+  height: 14px;
+  border-radius: 2px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  display: block;
+
+  @media (max-width: 768px) {
+    width: 24px;
+    height: 17px;
+  }
+`;
+
+import flagUs from '../../images/flag-us.svg';
+import flagEs from '../../images/flag-es.svg';
+import flagDe from '../../images/flag-de.svg';
+
+const languageFlags = {
+  en: flagUs,
+  es: flagEs,
+  de: flagDe,
+};
 
 const languageNames = {
   en: 'English',
@@ -70,22 +72,22 @@ const languageNames = {
 };
 
 function LanguageSelector({ locale, onLocaleChange }) {
-  const handleChange = event => {
-    onLocaleChange(event.target.value);
+  const handleLanguageChange = lang => {
+    onLocaleChange(lang);
   };
 
   return (
     <LanguageWrapper>
-      <LanguageLabel>
-        <FormattedMessage {...messages.language} />:
-      </LanguageLabel>
-      <LanguageSelect value={locale} onChange={handleChange}>
-        {appLocales.map(lang => (
-          <option key={lang} value={lang}>
-            {languageNames[lang]}
-          </option>
-        ))}
-      </LanguageSelect>
+      {appLocales.map(lang => (
+        <FlagButton
+          key={lang}
+          active={locale === lang}
+          onClick={() => handleLanguageChange(lang)}
+          title={languageNames[lang]}
+        >
+          <FlagIcon src={languageFlags[lang]} alt={languageNames[lang]} />
+        </FlagButton>
+      ))}
     </LanguageWrapper>
   );
 }
@@ -107,4 +109,3 @@ export default connect(
   mapStateToProps,
   mapDispatchToProps,
 )(LanguageSelector);
-
